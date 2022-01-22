@@ -1,66 +1,27 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+### วิธีติดตั้ง
+1. clone project
+   ```git clone https://github.com/nirusduddinmateh/laravel-restful-api.git```
+2. เมื่อ clone เสร็จแล้วให้เข้าไป folder project คลิกขวา เลือก Git Bash Here
+3. รันคำสั่ง ```composer update```
+4. ให้สร้างฐานข้อมูลชื่อ restful_db ผ่าน phpMyAdmin หรือ อื่นๆ ที่สามารถสร้างฐานข้อมูลได้
+5. รันคำสั่ง ```copy .env.example .env``` ***Windows หรือ ```cp .env.example .env```
+6. รันคำสั่ง ```php artisan migrate``` เพื่อสร้างตารางข้อมูล หรือ ```php artisan migrate:refresh``` สำหรับคนที่ใช้ฐานข้อมูลเดิม
+7. รันคำสั่ง ```php artisan db:seed``` เพื่อสร้างตัวอย่างข้อมูล
+8. รันคำสั่ง ```php artisan jwt:secret``` เพื่อสร้าง Jwt Key
+9. รันคำสั่ง ```php artisan storage:link``` เพื่อสร้าง symlink
+10. รันคำสั่ง ```php artisan serve```
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+### ติดตั้ง Ngrok
+####***ต้องสมัครสมาชิก ก่อนใช้งาน
+1. ทำการดาวน์โหลด Ngrok โดยการเข้าไปที่ https://ngrok.com/download และทำการเลือก Windows (รูปภาพที่ 10 ดาวน์โหลด Ngrok บน Windows)
+2. ทำการ Unzip ไฟล์และทำการเปิดโปรแกรมโดยการ คลิกขวา เลือก Run as administrator จะปรากฏหน้าต่าง Ngrok (รูปภาพที่ 11 การเปิดโปรแกรม Ngrok)
+3. เชื่อมต่อกับบัญชี ไปดูได้ที่ https://dashboard.ngrok.com/status ตรงหัวข้อ Connect your account
+   ![ngrok_2.png](ngrok_2.png)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+4. ใช้คำสั่งเพื่อทำการสั่งเริ่มต้นรันโปรแกรม โดยที่เลขที่ต่อท้ายคำสั่งคือเลขของค่า Port นั่นเอง
+   ใช้คำสั่ง (เริ่มต้นโปรแกรม Ngrok บน Windows)
+   ```ngrok http 8000```
+   ![ngrok_1.png](ngrok_1.png)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. ทดสอบเข้าใช้งานโดยเข้าจาก URL ที่ปรากฏบน Terminal หรือเข้าดูได้จาก https://dashboard.ngrok.com/status
