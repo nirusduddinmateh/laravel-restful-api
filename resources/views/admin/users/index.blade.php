@@ -47,7 +47,7 @@
                                         @foreach($users as $item)
                                             <tr>
                                                 <th scope="row">{{ $item->id }}</th>
-                                                <td><img src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}" class="rounded-full h-20 w-20 object-cover" height="16px"></td>
+                                                <td><img src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}" class="rounded-full h-10 w-10 object-cover" height="16px"></td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->email }}</td>
                                                 <td></td>
