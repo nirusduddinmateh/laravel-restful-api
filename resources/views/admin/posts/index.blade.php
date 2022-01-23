@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Posts') }}
+            {{ __('รายการอัพโหลด') }}
         </h2>
     </x-slot>
     <div>
@@ -13,14 +13,14 @@
                             <div class="card-body">
                                 <a href="{{ route('posts.create') }}" class="btn btn-success btn-sm"
                                    title="Add New User">
-                                    <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                                    <i class="fa fa-plus" aria-hidden="true"></i> อัปโหลดรูปภาพ
                                 </a>
 
                                 <form action="{{ route('posts.index') }}" autocomplete="off"
                                       class="form-inline float-right">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="q"
-                                               placeholder="Search..."
+                                               placeholder="ค้นหา..."
                                                value="{{ request('search') }}">
                                         <span class="input-group-append">
                                                 <button class="btn btn-secondary" type="submit">
@@ -35,19 +35,18 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Photo</th>
-                                            <th>Description</th>
-                                            <th>Actions</th>
+                                            <th>รหัส</th>
+                                            <th>รูป</th>
+                                            <th>คำอธิบาย</th>
+                                            <th>เครื่องมือ</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($posts as $item)
                                             <tr>
                                                 <th scope="row">{{ $item->id }}</th>
-                                                <td>Photo</td>
-                                                <td>Description</td>
-                                                <td></td>
+                                                <td><img src="{{ Storage::url($item->img) }}" class="h-16 w-16 object-cover"></td>
+                                                <td>{{ $item->description }}</td>
                                                 <td>
                                                     <a href="{{ route('posts.show', $item->id) }}" title="View">
                                                         <button class="btn btn-info btn-sm">

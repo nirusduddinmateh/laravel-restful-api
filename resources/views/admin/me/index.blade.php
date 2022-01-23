@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('รายชื่อสมาชิก') }}
+            {{ __('รายการอัพโหลด') }}
         </h2>
     </x-slot>
     <div>
@@ -11,18 +11,17 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <a href="{{ route('users.create') }}" 
-                                class="btn btn-success"
-                                   title="เพิ่มสมาชิก">
-                                    <i class="fa fa-plus" aria-hidden="true"></i> เพิ่มสมาชิก
+                                <a href="{{ route('me.create') }}" class="btn btn-success btn-sm"
+                                   title="Add New User">
+                                    <i class="fa fa-plus" aria-hidden="true"></i> อัปโหลดรูปภาพ
                                 </a>
 
-                                <form action="{{ route('users.index') }}" autocomplete="off"
+                                <form action="{{ route('me.index') }}" autocomplete="off"
                                       class="form-inline float-right">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="q"
                                                placeholder="ค้นหา..."
-                                               value="{{ request('search') }}">
+                                               value="{{ request('q') }}">
                                         <span class="input-group-append">
                                                 <button class="btn btn-secondary" type="submit">
                                                     <i class="fa fa-search"></i>
@@ -37,33 +36,29 @@
                                         <thead>
                                         <tr>
                                             <th>รหัส</th>
-                                            <th>รูปภาพ</th>
-                                            <th>ชื่อผู้ใช้งาน</th>
-                                            <th>อีเมล</th>
-                                            <th>สิทธิใช้งาน</th>
+                                            <th>รูป</th>
+                                            <th>คำอธิบาย</th>
                                             <th>เครื่องมือ</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($users as $item)
+                                        @foreach($posts as $item)
                                             <tr>
                                                 <th scope="row">{{ $item->id }}</th>
-                                                <td><img src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}" class="rounded-full h-10 w-10 object-cover" height="16px"></td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->email }}</td>
-                                                <td>{{ $item->role }}</td>
+                                                <td><img src="{{ Storage::url($item->img) }}" class="h-16 w-16 object-cover"></td>
+                                                <td>{{ $item->description }}</td>
                                                 <td>
-                                                    <a href="{{ route('users.show', $item->id) }}" title="View">
+                                                    <a href="{{ route('me.show', $item->id) }}" title="View">
                                                         <button class="btn btn-info btn-sm">
                                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                                         </button>
                                                     </a>
-                                                    <a href="{{ route('users.edit', $item->id) }}" title="Edit">
+                                                    <a href="{{ route('me.edit', $item->id) }}" title="Edit">
                                                         <button class="btn btn-primary btn-sm">
                                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                         </button>
                                                     </a>
-                                                    <form action="{{ route('users.destroy', $item->id) }}" method="post" style="display:inline">
+                                                    <form action="{{ route('me.destroy', $item->id) }}" method="post" style="display:inline">
                                                         @csrf
                                                         {{ method_field('DELETE') }}
                                                         <button type="submit"
@@ -78,7 +73,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="pagination-wrapper"> {!! $users->appends(['search' => Request::get('search')])->render() !!} </div>
+                                    <div class="pagination-wrapper"> {!! $posts->appends(['search' => Request::get('search')])->render() !!} </div>
                                 </div>
                             </div>
                         </div>

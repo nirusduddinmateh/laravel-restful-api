@@ -9,21 +9,25 @@
                         <x-jet-application-mark class="block h-9 w-auto"/>
                     </a>
                 </div>
+
                 <!-- Navigation Links -->
                 @can('member')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('me.index') }}" :active="request()->routeIs('me.index')">
+                            {{ __('รูปของฉัน') }}
+                        </x-jet-nav-link>
                     </div>
                 @endcan
                 @can('admin')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                            {{ __('Users') }}
+                            {{ __('สมาชิก') }}
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
-                            {{ __('Posts') }}
+                            {{ __('รูปภาพ') }}
                         </x-jet-nav-link>
                     </div>
                 @endcan

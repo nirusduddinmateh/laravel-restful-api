@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,20 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('dashboard'));
 });
 
 Route::middleware([
     'auth:sanctum',
     'verified'
-])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::middleware([
-    'auth:sanctum',
-    'verified'
 ])->group(function () {
+
+    Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::resource('me', App\Http\Controllers\MeController::class);
 
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('posts', App\Http\Controllers\PostController::class);
