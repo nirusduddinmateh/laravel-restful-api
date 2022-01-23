@@ -65,6 +65,21 @@
     {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
 </div>
 
+<div class="form-group{{ $errors->has('role') ? 'has-error' : ''}}">
+    <label for="role">สิทธิใช้งาน</label>
+    <select id="role" name="role" required>
+        @if ($formMode === 'edit')
+            <option value="admin"  {{ $model->role === 'admin'  ? 'selected':'' }}>แอดมิน</option>
+            <option value="member" {{ $model->role === 'member' ? 'selected':'' }}>สมาชิก</option>
+        @else
+            <option value="admin">แอดมิน</option>
+            <option value="member">สมาชิก</option>
+        @endif
+    </select>
+
+    {!! $errors->first('role', '<p class="help-block">:message</p>') !!}
+</div>
+
 <div class="form-group{{ $errors->has('profile_photo_path') ? 'has-error' : ''}}">
     <label for="profile_photo_path">Photo</label>
     <input type="file" id="profile_photo_path" name="profile_photo_path">

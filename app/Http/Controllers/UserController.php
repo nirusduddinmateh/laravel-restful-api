@@ -114,7 +114,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name'  => 'required',
             'email' => 'required|string|max:255|email|unique:users,email,' . $id,
-            'profile_photo_path' => 'image'
+            'profile_photo_path' => 'image',
+            'role' => 'in:admin,member'
         ]);
 
         $data = $request->all();
