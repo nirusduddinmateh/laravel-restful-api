@@ -10,10 +10,11 @@
             <div class="overflow-hidden sm:rounded-lg">
                 <div class="row mb-2">
                     <div class="col">
-                        <form action="{{ route('dashboard') }}" autocomplete="off"
-                              class="form-inline float-right">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="q"
+                        <form action="{{ route('dashboard') }}" autocomplete="off" class="form-inline float-right">
+                            <div class="input-group ">
+                                <input type="text"
+                                       class="form-control"
+                                       name="q"
                                        placeholder="ค้นหา..."
                                        value="{{ request('q') }}">
                                 <span class="input-group-append">
@@ -25,15 +26,15 @@
                         </form>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-2">
                     @foreach($posts as $item)
-                        <div class="col-lg-3 col-sm-6 mb-3">
-                            <div class="card" style="width: 18rem;">
+                        <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
+                            <div class="card">
                                 <img src="{{ Storage::url($item->img) }}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <small class="mb-2 text-primary">รูปโดย: {{ $item->user->name }}</small>
                                     <p class="card-text">{{ $item->description }}</p>
-                                    <a href="#" class="btn btn-sm btn-secondary">ดูรูปภาพ</a>
+                                    {{--<a href="#" class="btn btn-sm btn-secondary">ดูรูปภาพ</a>--}}
                                 </div>
                             </div>
                         </div>

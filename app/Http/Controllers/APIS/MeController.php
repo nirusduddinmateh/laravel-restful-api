@@ -3,31 +3,29 @@
 namespace App\Http\Controllers\APIS;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
-class PostController extends Controller
+class MeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function index(Request $request)
     {
         $keyword = $request->get('q');
         $perPage = 15;
 
         if (!empty($keyword)) {
-            $posts = Post::query()->where('name', 'LIKE', "%$keyword%")
-                ->latest()
-                ->paginate($perPage);
+            $posts = Auth::user()->posts()->where('description', 'LIKE', "%$keyword%")
+                ->latest()->paginate($perPage);
         } else {
-            $posts = Post::query()
-                ->latest()
-                ->paginate($perPage);
+            $posts = Auth::user()->posts()->latest()->paginate($perPage);
         }
 
         return response()->json($posts);
@@ -52,7 +50,7 @@ class PostController extends Controller
             $data['img'] = $request->file('img')->storePublicly('posts', ['disk' => 'public']);
         }
 
-        $post = Post::query()->create($data);
+        $post = Auth::user()->posts()->create($data);
 
         return response()->json($post, 201);
     }
@@ -65,7 +63,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::query()->findOrFail($id);
+        $post = Auth::user()->posts()->findOrFail($id);
 
         return response()->json($post);
     }
@@ -85,7 +83,7 @@ class PostController extends Controller
         ]);
 
         $data = $request->all();
-        $post = Post::query()->findOrFail($id);
+        $post = Auth::user()->posts()->findOrFail($id);
 
         if ($request->hasFile('img')) {
             Storage::disk('public')->delete($post->profile_photo_path);
@@ -104,7 +102,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::query()->findOrFail($id);
+        $post = Auth::user()->posts()->findOrFail($id);
         Storage::disk('public')->delete($post->img);
         $post->delete();
 

@@ -15,27 +15,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'middleware' => 'api'
+], function () {
+    Route::get('dashboard', [App\Http\Controllers\APIS\HomeController::class, 'dashboard'])->name('api.dashboard');
 });
+
 
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function () {
-
-    Route::post('register', AuthController::class . '@register');
-    Route::post('login', AuthController::class . '@login');
-    Route::post('logout', AuthController::class . '@logout');
-    Route::post('refresh', AuthController::class . '@refresh');
-    Route::get('me', AuthController::class . '@me');
-
+    Route::post('register', AuthController::class . '@register')->name('register');
+    Route::post('login', AuthController::class . '@login')->name('login');
 });
 
+
 Route::group([
-    // 'middleware' => 'auth:api'
+    'middleware' => 'auth:api'
 ], function () {
 
-    Route::apiResource('users', App\Http\Controllers\APIS\UserController::class);
+    Route::group([
+        'prefix' => 'auth'
+    ], function () {
+        Route::get('me', AuthController::class . '@me')->name('me');
+        Route::apiResource('me/posts', App\Http\Controllers\APIS\MeController::class);
 
+        Route::post('logout', AuthController::class . '@logout')->name('logout');
+    });
+
+    Route::apiResource('users', App\Http\Controllers\APIS\UserController::class);
+    Route::apiResource('posts', App\Http\Controllers\APIS\PostController::class);
 });
