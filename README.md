@@ -11,6 +11,12 @@
 9. รันคำสั่ง ```php artisan storage:link``` เพื่อสร้าง symlink
 10. รันคำสั่ง ```php artisan serve```
 
+### ข้อมูลผู้ใช้สำหรับทดสอบ
+<b>admin </b> ```admin@admin.com:password```
+<b>user </b> ```user@user.com:password```
+
+### API Endpoints
+![api-endpoints.jpg](api-endpoints.jpg)
 
 ### ติดตั้ง Ngrok
 ####***ต้องสมัครสมาชิก ก่อนใช้งาน
