@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
@@ -120,7 +121,7 @@ class UserController extends Controller
 
         $data = $request->except('password');
         if ($request->has('password')) {
-            if ($request->get('password'))
+            if (!is_null($request->get('password')))
                 $data['password'] = bcrypt($request->password);
         }
 

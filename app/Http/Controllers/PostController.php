@@ -48,33 +48,50 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return Application|RedirectResponse|Response|Redirector
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required',
+            'img' => 'image'
+        ]);
+
+        $data = $request->all();
+
+        if ($request->hasFile('img')) {
+            $data['img'] = $request->file('img')->storePublicly('posts', ['disk' => 'public']);
+        }
+
+        Post::query()->create($data);
+
+        return redirect(route('posts.index'))->with('flash_message', 'Post added!');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return Application|Factory|View|Response
      */
     public function show($id)
     {
-        //
+        $post = Post::query()->findOrFail($id);
+
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return Application|Factory|View|Response
      */
     public function edit($id)
     {
-        //
+        $post = Post::query()->findOrFail($id);
+
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -82,11 +99,25 @@ class PostController extends Controller
      *
      * @param Request $request
      * @param  int  $id
-     * @return Response
+     * @return Application|RedirectResponse|Response|Redirector
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'description'  => 'required',
+            'img' => 'image',
+        ]);
+
+        $post = Post::query()->findOrFail($id);
+
+        if ($request->hasFile('img')) {
+            Storage::disk('public')->delete($post->profile_photo_path);
+            $data['img'] = $request->file('img')->storePublicly('posts', ['disk' => 'public']);
+        }
+
+        $post->update($data);
+
+        return redirect(route('posts.index'))->with('flash_message', 'Post updated!');
     }
 
     /**
