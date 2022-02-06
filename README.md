@@ -18,6 +18,12 @@
 ### API Endpoints
 ![api-endpoints.jpg](api-endpoints.jpg)
 
+### Import Postman Collection 
+1. เปิด Postman
+2. คลิก Import
+3. เลือกแทบ Link แล้วใส่ที่อยู่ดังนี้
+   ```https://raw.githubusercontent.com/nirusduddinmateh/laravel-restful-api/main/api-endpoints.postman_collection.json```
+   
 ### ติดตั้ง Ngrok
 ####***ต้องสมัครสมาชิก ก่อนใช้งาน
 1. ทำการดาวน์โหลด Ngrok โดยการเข้าไปที่ https://ngrok.com/download และทำการเลือก Windows (รูปภาพที่ 10 ดาวน์โหลด Ngrok บน Windows)
