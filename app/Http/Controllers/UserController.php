@@ -118,9 +118,10 @@ class UserController extends Controller
             'role' => 'in:admin,member'
         ]);
 
-        $data = $request->all();
+        $data = $request->except('password');
         if ($request->has('password')) {
-            $data['password'] = bcrypt($request->password);
+            if ($request->get('password'))
+                $data['password'] = bcrypt($request->password);
         }
 
         $user = User::query()->findOrFail($id);
